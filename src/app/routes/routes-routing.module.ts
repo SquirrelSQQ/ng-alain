@@ -32,15 +32,10 @@ const routes: Routes = [
             { path: 'dashboard/monitor', component: DashboardMonitorComponent },
             { path: 'dashboard/workplace', component: DashboardWorkplaceComponent },
             { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' },
-            { path: 'elements', loadChildren: './elements/elements.module#ElementsModule' },
-            { path: 'other', loadChildren: './other/other.module#OtherModule' },
-            { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
-            { path: 'editor', loadChildren: './editor/editor.module#EditorModule' },
-            { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
-            { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-            { path: 'maps', loadChildren: './maps/maps.module#MapsModule' },
+            { path: 'style', loadChildren: './style/style.module#StyleModule' },
+            { path: 'delon', loadChildren: './delon/delon.module#DelonModule' },
+
             { path: 'pages', loadChildren: './pages/pages.module#PagesModule' },
-            { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' },
             { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
             { path: 'pro', loadChildren: './pro/pro.module#ProModule' }
         ]
