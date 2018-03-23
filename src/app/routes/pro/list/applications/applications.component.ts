@@ -1,19 +1,22 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-    selector: 'pro-list-search',
-    templateUrl: './search.component.html'
+    selector: 'pro-list-applications',
+    templateUrl: './applications.component.html',
+    styleUrls: [ './applications.component.less' ]
 })
-export class ProSearchComponent implements OnInit {
+export class ProListApplicationsComponent implements OnInit {
     q: any = {
-        ps: 5,
+        ps: 8,
         categories: [],
         owners: [ 'zxx' ]
     };
 
-    list: any[] = [];
-    loading = false;
+    list: any[] = [ ];
+
+    loading = true;
 
     // region: cateogry
     categories = [
@@ -38,39 +41,11 @@ export class ProSearchComponent implements OnInit {
         } else {
             this.categories[idx].value = status;
         }
+        this.getData();
     }
     // endregion
 
-    // region: owners
-    owners = [
-        {
-            id: 'wzj',
-            name: '我自己',
-        },
-        {
-            id: 'wjh',
-            name: '吴家豪',
-        },
-        {
-            id: 'zxx',
-            name: '周星星',
-        },
-        {
-            id: 'zly',
-            name: '赵丽颖',
-        },
-        {
-            id: 'ym',
-            name: '姚明',
-        }
-    ];
-
-    setOwner() {
-        this.q.owners = [`wzj`];
-    }
-    // endregion
-
-    constructor(private http: _HttpClient) {}
+    constructor(private http: _HttpClient, public msg: NzMessageService) {}
 
     ngOnInit() {
         this.getData();
@@ -79,8 +54,24 @@ export class ProSearchComponent implements OnInit {
     getData() {
         this.loading = true;
         this.http.get('/api/list', { count: this.q.ps }).subscribe((res: any) => {
-            this.list = res;
+            this.list = res.map(item => {
+                item.activeUser = this.formatWan(item.activeUser);
+                return item;
+            });
             this.loading = false;
         });
+    }
+
+
+    private formatWan(val) {
+        const v = val * 1;
+        if (!v || isNaN(v)) return '';
+
+        let result = val;
+        if (val > 10000) {
+            result = Math.floor(val / 10000);
+            result = `${result}`;
+        }
+        return result;
     }
 }

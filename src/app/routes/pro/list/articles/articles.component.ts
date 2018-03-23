@@ -1,23 +1,19 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-    selector: 'pro-list-filter-card-list',
-    templateUrl: './filter-card-list.component.html',
-    styleUrls: [ './filter-card-list.component.less' ],
-    encapsulation: ViewEncapsulation.Emulated
+    selector: 'pro-list-articles',
+    templateUrl: './articles.component.html'
 })
-export class ProFilterCardListComponent implements OnInit {
+export class ProListArticlesComponent implements OnInit {
     q: any = {
-        ps: 8,
+        ps: 5,
         categories: [],
         owners: [ 'zxx' ]
     };
 
-    list: any[] = [ ];
-
-    loading = true;
+    list: any[] = [];
+    loading = false;
 
     // region: cateogry
     categories = [
@@ -42,37 +38,49 @@ export class ProFilterCardListComponent implements OnInit {
         } else {
             this.categories[idx].value = status;
         }
-        this.getData();
     }
     // endregion
 
-    constructor(private http: _HttpClient, public msg: NzMessageService) {}
+    // region: owners
+    owners = [
+        {
+            id: 'wzj',
+            name: '我自己',
+        },
+        {
+            id: 'wjh',
+            name: '吴家豪',
+        },
+        {
+            id: 'zxx',
+            name: '周星星',
+        },
+        {
+            id: 'zly',
+            name: '赵丽颖',
+        },
+        {
+            id: 'ym',
+            name: '姚明',
+        }
+    ];
+
+    setOwner() {
+        this.q.owners = [`wzj`];
+    }
+    // endregion
+
+    constructor(private http: _HttpClient) {}
 
     ngOnInit() {
         this.getData();
     }
 
-    getData() {
+    getData(more = false) {
         this.loading = true;
         this.http.get('/api/list', { count: this.q.ps }).subscribe((res: any) => {
-            this.list = res.map(item => {
-                item.activeUser = this.formatWan(item.activeUser);
-                return item;
-            });
+            this.list = more ? this.list.concat(res) : res;
             this.loading = false;
         });
-    }
-
-
-    private formatWan(val) {
-        const v = val * 1;
-        if (!v || isNaN(v)) return '';
-
-        let result = val;
-        if (val > 10000) {
-            result = Math.floor(val / 10000);
-            result = `${result}<em>万</em>`;
-        }
-        return result;
     }
 }

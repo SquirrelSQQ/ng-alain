@@ -1,29 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-    selector: 'pro-list-cover-card-list',
-    templateUrl: './cover-card-list.component.html',
-    styles: [`
-    :host ::ng-deep .ant-card-meta-title {
-        margin-bottom: 4px;
-    }
-    :host ::ng-deep nz-list nz-card {
-        margin-bottom: 0 !important;
-    }
-    :host ::ng-deep .card-item-content {
-        display: flex;
-        margin-top: 16px;
-        margin-bottom: -4px;
-        line-height: 20px;
-        height: 20px;
-        justify-content: space-between;
-    }
-    `],
-    encapsulation: ViewEncapsulation.Emulated
+    selector: 'pro-list-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: [ './projects.component.less' ]
 })
-export class ProCoverCardListComponent implements OnInit {
+export class ProListProjectsComponent implements OnInit {
     q: any = {
         ps: 8,
         categories: [],

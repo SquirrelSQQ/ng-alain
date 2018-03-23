@@ -127,12 +127,18 @@
         "text": "Pro",
         "i18n": "pro",
         "group": true,
+        "hideInBreadcrumb": true,
         "children": [{
             "text": "Form Page",
             "i18n": "form",
             "link": "/pro/form",
             "icon": "icon-note",
+            "hideInBreadcrumb": true,
             "children": [{
+                "text": "Basic Form",
+                "link": "/pro/form/basic-form",
+                "i18n": "basic-form"
+            }, {
                 "text": "Step Form",
                 "link": "/pro/form/step-form",
                 "i18n": "step-form"
@@ -144,8 +150,8 @@
         }, {
             "text": "List",
             "i18n": "pro-list",
-            "link": "/pro/list",
             "icon": "icon-grid",
+            "hideInBreadcrumb": true,
             "children": [{
                 "text": "Table List",
                 "link": "/pro/list/table-list",
@@ -159,17 +165,20 @@
                 "link": "/pro/list/card-list",
                 "i18n": "pro-card-list"
             }, {
-                "text": "Cover Card List",
-                "link": "/pro/list/cover-card-list",
-                "i18n": "pro-cover-card-list"
-            }, {
-                "text": "Filter Card List",
-                "link": "/pro/list/filter-card-list",
-                "i18n": "pro-filter-card-list"
-            }, {
-                "text": "Search",
-                "link": "/pro/list/search",
-                "i18n": "pro-search"
+                "text": "Search List",
+                "i18n": "pro-search",
+                "children": [
+                    {
+                        "link": "/pro/list/articles",
+                        "i18n": "pro-search-article"
+                    }, {
+                        "link": "/pro/list/projects",
+                        "i18n": "pro-search-project"
+                    }, {
+                        "link": "/pro/list/applications",
+                        "i18n": "pro-search-app"
+                    }
+                ]
             }]
         }, {
             "text": "Profile",
